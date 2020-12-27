@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: load-generator-hpa
+  labels:
+    app: load-generator-hpa
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: load-generator-hpa
+  template:
+    metadata:
+      name: load-generator-hpa
+      labels:
+        app: load-generator-hpa
+    spec:
+      containers:
+      - name: load-generator-hpa
+        image: busybox
+        command:
+        - /bin/sh
+        - -c
+        - "while true; do wget -q -O- http://10.245.254.65/airportName?iataCode=SDU; done"

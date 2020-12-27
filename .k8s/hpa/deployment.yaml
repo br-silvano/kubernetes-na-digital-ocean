@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: airportnames
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      name: airportnames
+  template:
+    metadata:
+      labels:
+        name: airportnames
+    spec:
+      containers:
+      - name: airportnames
+        image: rmerces/airportnames
+        resources:
+          requests:
+            cpu: 100m
+        ports:
+          - containerPort: 8080
